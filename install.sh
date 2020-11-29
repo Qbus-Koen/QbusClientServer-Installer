@@ -43,7 +43,7 @@ echo 'Downloading nesecary files from github...'
 spin &
 SPIN_PID=$!
 trap "kill -9 $SPIN_PID" `seq 0 15`
-git clone https://github.com/QbusKoen/QbusOH3 ~/QbusOpenHab3> /dev/null 2>&1
+git clone https://github.com/QbusKoen/QbusClientServer ~/QbusOpenHab> /dev/null 2>&1
 kill -9 $SPIN_PID
 
 echo 'Preparing Qbus services'
@@ -56,7 +56,7 @@ echo 'After=multi-user.target qbusserver.service' | sudo tee -a /lib/systemd/sys
 echo '' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1
 echo '[Service]' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1
 echo 'Type=simple' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1
-echo 'ExecStart= mono /home/pi/QbusOpenHab3/QbusClient/QbusClient.exe '$ipvar' '$uservar' '$passvar' '$snvar'' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1
+echo 'ExecStart= mono ~/QbusOpenHab/QbusClient/QbusClient.exe '$ipvar' '$uservar' '$passvar' '$snvar' 10' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1
 echo 'Restart=always' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1
 echo '' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1
 echo '[Install]' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1
@@ -68,7 +68,7 @@ echo 'After=multi-user.target' | sudo tee -a /lib/systemd/system/qbusserver.serv
 echo '' | sudo tee -a /lib/systemd/system/qbusserver.service > /dev/null 2>&1
 echo '[Service]' | sudo tee -a /lib/systemd/system/qbusserver.service > /dev/null 2>&1
 echo 'Type=simple' | sudo tee -a /lib/systemd/system/qbusserver.service > /dev/null 2>&1
-echo 'ExecStart= mono /home/pi/QbusOpenHab3/QbusServer/QServer.exe' | sudo tee -a /lib/systemd/system/qbusserver.service > /dev/null 2>&1
+echo 'ExecStart= mono ~/QbusOpenHab/QbusServer/QServer.exe' | sudo tee -a /lib/systemd/system/qbusserver.service > /dev/null 2>&1
 echo 'Restart=always' | sudo tee -a /lib/systemd/system/qbusserver.service > /dev/null 2>&1
 echo '' | sudo tee -a /lib/systemd/system/qbusserver.service > /dev/null 2>&1
 echo '[Install]' | sudo tee -a /lib/systemd/system/qbusserver.service > /dev/null 2>&1
