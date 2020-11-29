@@ -1,2 +1,2 @@
-# QbusClientServer-Installer
- Install script for Qbus Client Server application
+# QbusClientServer
+ Client Server application for openHAB
