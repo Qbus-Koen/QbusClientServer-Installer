@@ -1,6 +1,8 @@
 # Qbus Client-Server Installer
  Client Server application installer for openHAB to be used on a Linux machine (raspberryPi)
- 
+
+![Qbus Logo](https://github.com/QbusKoen/QbusClientServer-Installer/blob/main/images/Logo.JPG)
+
 ## This repository contains
 * The installation script which
   * Installs Mono (Client and server are written in .net)
