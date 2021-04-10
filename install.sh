@@ -5,7 +5,10 @@ USERVAR=''
 PASSVAR=''
 IPVAR=''
 SNVAR=''
+
 OPENHAB=''
+
+LUSER=''
 
 # ============================== Define colors ==============================
 DISPLTEXT=''
@@ -66,6 +69,8 @@ installMono(){
 	kill -9 $SPIN_PID
 }
 
+# 
+
 # Create a script in home folder to change settings of the CTD
 createChangeSettings(){
 	spin &
@@ -75,13 +80,16 @@ createChangeSettings(){
 	sudo rm /tmp/qbus/setctd.sh > /dev/null 2>&1
 
 	echo "#!/bin/bash" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
-	echo "echo \" ██████╗ ██████╗ ██╗   ██╗███████╗     ██████╗██╗     ██╗███████╗███╗   ██╗████████╗    ███████╗███████╗██████╗ ██╗   ██╗███████╗██████╗ \"" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
-	echo "echo \"██╔═══██╗██╔══██╗██║   ██║██╔════╝    ██╔════╝██║     ██║██╔════╝████╗  ██║╚══██╔══╝    ██╔════╝██╔════╝██╔══██╗██║   ██║██╔════╝██╔══██╗\"" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
-	echo "echo \"██║   ██║██████╔╝██║   ██║███████╗    ██║     ██║     ██║█████╗  ██╔██╗ ██║   ██║       ███████╗█████╗  ██████╔╝██║   ██║█████╗  ██████╔╝\"" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
-	echo "echo \"██║▄▄ ██║██╔══██╗██║   ██║╚════██║    ██║     ██║     ██║██╔══╝  ██║╚██╗██║   ██║       ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██╔══╝  ██╔══██╗\"" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
-	echo "echo \"╚██████╔╝██████╔╝╚██████╔╝███████║    ╚██████╗███████╗██║███████╗██║ ╚████║   ██║       ███████║███████╗██║  ██║ ╚████╔╝ ███████╗██║  ██║\"" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
-	echo "echo \" ╚══▀▀═╝ ╚═════╝  ╚═════╝ ╚══════╝     ╚═════╝╚══════╝╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝       ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝\"" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
-	echo "echo ''" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
+
+	echo "echo '******************************************************************************************'" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
+	echo "echo '*   ____  _                  _____ _ _            _      _____                           *'" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
+	echo "echo '*  / __ \| |                / ____| (_)          | |    / ____|                          *'" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
+	echo "echo '* | |  | | |__  _   _ ___  | |    | |_  ___ _ __ | |_  | (___   ___ _ ____   _____ _ __  *'" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
+	echo "echo '* | |  | | |_ \| | | / __| | |    | | |/ _ \ |_ \| __|  \___ \ / _ \ |__\ \ / / _ \ |__| *'" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
+	echo "echo '* | |__| | |_) | |_| \__ \ | |____| | |  __/ | | | |_   ____) |  __/ |   \ V /  __/ |    *'" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
+	echo "echo '*  \___\_\_.__/ \__,_|___/  \_____|_|_|\___|_| |_|\__| |_____/ \___|_|    \_/ \___|_|    *'" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
+	echo "echo '*                                                                                        *'" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
+	echo "echo '******************************************************************************************'" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
 	echo "" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
 	echo "read -p 'Enter username of your controller: ' USERVAR" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
 	echo "echo -n 'Enter the password of your controller: '" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
@@ -103,6 +111,7 @@ createChangeSettings(){
 	echo "read -p 'Enter the ip address of your controller: ' IPVAR" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
 	echo "read -p 'Enter the serial number of your controller: ' SNVAR" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
 	echo "" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
+	echo "# Remove old service" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
 	echo "sudo rm /lib/systemd/system/qbusclient.service" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
 	echo "" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
 	echo "# Create Client service" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
@@ -114,8 +123,8 @@ createChangeSettings(){
 	echo "echo 'Type=simple' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
 	echo "echo 'ExecStart= mono /usr/bin/qbus/qbusclient/QbusClient.exe '\$IPVAR' '\$USERVAR' '\$PASSVAR' '\$SNVAR' 100' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
 	echo "echo 'Restart=always' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
-	echo "echo 'StandardOutput=file:/var/log/qbus/qbusclient.log' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
-	echo "echo 'StandardError=file:/var/log/qbus/qbusclient_error.log' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
+	echo "echo 'StandardOutput=append:/var/log/qbus/qbusclient.log' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
+	echo "echo 'StandardError=append:/var/log/qbus/qbusclient_error.log' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
 	echo "echo '' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
 	echo "echo '[Install]' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
 	echo "echo 'WantedBy=multi-user.target' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
@@ -123,8 +132,11 @@ createChangeSettings(){
 	echo "sudo systemctl daemon-reload" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
 	echo "sudo systemctl restart qbusclient.service" | sudo tee -a /tmp/qbus/setctd.sh > /dev/null 2>&1
 
-	sudo cp /tmp/qbus/setctd.sh ~/setctd.sh > /dev/null 2>&1
+	cp /tmp/qbus/setctd.sh ~/setctd.sh > /dev/null 2>&1
 	sudo chmod +x ~/setctd.sh > /dev/null 2>&1
+	
+	LUSER=$(whoami)
+	sudo chown $LUSER:$LUSER ~/setctd.sh
 	
 	kill -9 $SPIN_PID
 }
@@ -140,24 +152,24 @@ installQbus(){
 
 	# Create software directory
 	sudo mkdir /usr/bin/qbus > /dev/null 2>&1
-	#sudo mkdir /usr/bin/qbus/qbusclient/ > /dev/null 2>&1
-	#sudo mkdir /usr/bin/qbus/qbusserver/ > /dev/null 2>&1
 
 	# Copy client and server to correct location
-	sudo cp -R /tmp/qbus/QbusClient /usr/bin/qbus/ > /dev/null 2>&1
-	sudo cp -R /tmp/qbus/QbusServer /usr/bin/qbus/ > /dev/null 2>&1
+	sudo cp -R /tmp/qbus/QbusClient/. /usr/bin/qbus/qbusclient > /dev/null 2>&1
+	sudo cp -R /tmp/qbus/QbusServer/. /usr/bin/qbus/qbusserver > /dev/null 2>&1
 
 	# Modify config file
 	sudo sed -i "s|<value>.\+</value>|<value>/usr/bin/qbus/qbusclient/</value>|g" /usr/bin/qbus/qbusclient/QbusClient.exe.config > /dev/null 2>&1
 	
 	# Create cleanup.sh
-	sudo sudo rm /usr/bin/qbus/qbusclient/cleanup.sh  > /dev/null 2>&1
 	echo '#!/bin/bash' | sudo tee -a /usr/bin/qbus/qbusclient/cleanup.sh > /dev/null 2>&1
 	echo '' | sudo tee -a /usr/bin/qbus/qbusclient/cleanup.sh > /dev/null 2>&1
-	echo "rm -R /usr/bin/qbus/qbusclient/'HomeCenter\Temp\'" | sudo tee -a /usr/bin/qbus/qbusclient/cleanup.sh > /dev/null 2>&1
-	echo 'rm /usr/bin/qbus/qbusclient/*.zip' | sudo tee -a /usr/bin/qbus/qbusclient/cleanup.sh > /dev/null 2>&1
+	echo "sudo rm -R /usr/bin/qbus/qbusclient/'HomeCenter\Temp\'" | sudo tee -a /usr/bin/qbus/qbusclient/cleanup.sh > /dev/null 2>&1
+	echo 'sudo rm /usr/bin/qbus/qbusclient/*.zip' | sudo tee -a /usr/bin/qbus/qbusclient/cleanup.sh > /dev/null 2>&1
 	sudo chmod +x /usr/bin/qbus/qbusclient/cleanup.sh > /dev/null 2>&1
-	sudo sed -i "s|loc|/usr/bin/qbus/qbusclient|g" /usr/bin/qbus/qbusclient/QbusClient.exe.config > /dev/null 2>&1
+	
+	# Chinging ownership of qbus to local user
+	LUSER=$(whoami)
+	sudo chown -R $LUSER:$LUSER /usr/bin/qbus/
 
 	# Create directory for logging
 	sudo mkdir /var/log/qbus/ > /dev/null 2>&1
@@ -165,7 +177,6 @@ installQbus(){
 	# Deleting old service files
 	sudo rm /lib/systemd/system/qbusclient.service > /dev/null 2>&1
 	sudo rm /lib/systemd/system/qbusserver.service > /dev/null 2>&1
-
 
 	# Create Client service
 	echo '[Unit]' | sudo tee -a /lib/systemd/system/qbusclient.service > /dev/null 2>&1
@@ -248,24 +259,28 @@ copyJar(){
 }
 
 
+
 # ============================== Start installation ==============================
 DISPLCOLOR=${ORANGE}
-
-DISPLTEXT=' ██████╗ ██████╗ ██╗   ██╗███████╗     ██████╗██╗     ██╗███████╗███╗   ██╗████████╗    ███████╗███████╗██████╗ ██╗   ██╗███████╗██████╗ '
+echo ''
+DISPLTEXT='******************************************************************************************'
 echoInColor
-DISPLTEXT='██╔═══██╗██╔══██╗██║   ██║██╔════╝    ██╔════╝██║     ██║██╔════╝████╗  ██║╚══██╔══╝    ██╔════╝██╔════╝██╔══██╗██║   ██║██╔════╝██╔══██╗'
+DISPLTEXT='*   ____  _                  _____ _ _            _      _____                           *'
 echoInColor
-DISPLTEXT='██║   ██║██████╔╝██║   ██║███████╗    ██║     ██║     ██║█████╗  ██╔██╗ ██║   ██║       ███████╗█████╗  ██████╔╝██║   ██║█████╗  ██████╔╝'
+DISPLTEXT='*  / __ \| |                / ____| (_)          | |    / ____|                          *'
 echoInColor
-DISPLTEXT='██║▄▄ ██║██╔══██╗██║   ██║╚════██║    ██║     ██║     ██║██╔══╝  ██║╚██╗██║   ██║       ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██╔══╝  ██╔══██╗'
+DISPLTEXT='* | |  | | |__  _   _ ___  | |    | |_  ___ _ __ | |_  | (___   ___ _ ____   _____ _ __  *'
 echoInColor
-DISPLTEXT='╚██████╔╝██████╔╝╚██████╔╝███████║    ╚██████╗███████╗██║███████╗██║ ╚████║   ██║       ███████║███████╗██║  ██║ ╚████╔╝ ███████╗██║  ██║'
+DISPLTEXT='* | |  | | |_ \| | | / __| | |    | | |/ _ \ |_ \| __|  \___ \ / _ \ |__\ \ / / _ \ |__| *'
 echoInColor
-DISPLTEXT=' ╚══▀▀═╝ ╚═════╝  ╚═════╝ ╚══════╝     ╚═════╝╚══════╝╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝       ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝'
+DISPLTEXT='* | |__| | |_) | |_| \__ \ | |____| | |  __/ | | | |_   ____) |  __/ |   \ V /  __/ |    *'
 echoInColor
-                                                                                                                                         
-																																 
-DISPLCOLOR=${NC}
+DISPLTEXT='*  \___\_\_.__/ \__,_|___/  \_____|_|_|\___|_| |_|\__| |_____/ \___|_|    \_/ \___|_|    *'
+echoInColor
+DISPLTEXT='*                                                                                        *'
+echoInColor
+DISPLTEXT='******************************************************************************************'
+echoInColor
 DISPLTEXT="Release date 10/04/2021 by ks@qbus.be"
 echoInColor
 echo ''
@@ -278,7 +293,7 @@ DISPLTEXT="The Qbus Client Server is an application to make your controller 'ope
 echoInColor
 DISPLTEXT="This application is written in a .net environement, so on Linux distributions Mono is required."
 echoInColor
-DISPLTEXT="For the moment only openHAB is supported, but more applications will be enabled in the fututre."
+DISPLTEXT="For the moment only openHAB is supported, but more applications will be enabled in the future."
 echoInColor
 echo ""
 
@@ -370,13 +385,12 @@ echo ''
 # ---------------- Install -----------------------
 echo ''
 
-DISPLTEXT='****************************************************************************************************************'
 DISPLCOLOR=${ORANGE}
+DISPLTEXT='******************************************************'
 echoInColor
-DISPLTEXT='****************************************************************************************************************'
 DISPLTEXT='* Everything is set, we will start the installation. *'
 echoInColor
-DISPLTEXT='****************************************************************************************************************'
+DISPLTEXT='******************************************************'
 echoInColor
 
 echo ''
@@ -425,12 +439,12 @@ case $OPENHAB in
 		echoInColor
 		;;
 	OH3Unstable)
-		DISPLTEXT='     -We have detected openHAB running the unstable (3.1.0-SNAPSHOT) version. Qbus Should work on this version. Since the Binding is not yet released, we will copy the testing JAR file to the correct location, stop OH, clean the cache (please answer yes) and start OH again. Please be patient, after a clean cache OH needs some time to reboot.'
+		DISPLTEXT='     -We have detected openHAB running the unstable (3.1.0-SNAPSHOT) version. Qbus should work on this version. Since the Binding is not yet released, we will copy the testing JAR file to the correct location, stop OH, clean the cache (please answer yes) and start OH again. Please be patient, after a clean cache OH needs some time to reboot.'
 		echoInColor
 		copyJar
 		;;
 	OH3Testing)
-		DISPLTEXT='     -We have detected openHAB running the testing (3.1.0Mx) version. Qbus Should work on this version. Since the Binding is not yet released, we will copy the testing JAR file to the correct location, stop OH, clean the cache (please answer yes) and start OH again. Please be patient, after a clean cache OH needs some time to reboot.'
+		DISPLTEXT='     -We have detected openHAB running the testing (3.1.0Mx) version. Qbus should work on this version. Since the Binding is not yet released, we will copy the testing JAR file to the correct location, stop OH, clean the cache (please answer yes) and start OH again. Please be patient, after a clean cache OH needs some time to reboot.'
 		echoInColor
 		copyJar
 		;;
@@ -464,3 +478,5 @@ else
 	DISPLTEXT='* You choose to not reboot your system. If you run into problems, first try to reboot!'
 	echoInColor
 fi
+
+exit 1
