@@ -1,7 +1,10 @@
 # Qbus Client-Server Installer
- Client Server application installer for openHAB to be used on a Linux machine (raspberryPi)
+ Client Server application installer to be used on a Linux machine (raspberryPi).
 
 ![Qbus Logo](https://github.com/QbusKoen/QbusClientServer-Installer/blob/main/images/Logo.JPG)
+
+## Why do you need this?
+Since the original development of Qbus, it was a closed system. This application makes the CTD controllers 'open' to communicate with other devices/applications.
 
 ## This repository contains
 * The installation script which
@@ -10,7 +13,7 @@
   * Creates services for the Client and Server
  
 ## Preparing your Qbus controller
-Make sure your controller is protected with a username & password.
+Make sure your controller is enabled for use of the DLL.
  
 ## How to use
 First make sure you've got git installed:
@@ -34,6 +37,3 @@ Run the installer:
 
 The installer will then ask for Username, Password, IP address and Serial nr of your controller.
 
-## Qbus Client-Server Updater
-With the installer, there also comes an update script.
-You can run this script when the Username, Password, IP address or Serial nr of your controller has changed.
