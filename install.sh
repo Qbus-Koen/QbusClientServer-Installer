@@ -167,7 +167,7 @@ installQbus(){
 	echo 'sudo rm /usr/bin/qbus/qbusclient/*.zip' | sudo tee -a /usr/bin/qbus/qbusclient/cleanup.sh > /dev/null 2>&1
 	sudo chmod +x /usr/bin/qbus/qbusclient/cleanup.sh > /dev/null 2>&1
 	
-	# Chinging ownership of qbus to local user
+	# Changing ownership of qbus to local user
 	LUSER=$(whoami)
 	sudo chown -R $LUSER:$LUSER /usr/bin/qbus/
 
@@ -252,7 +252,7 @@ checkOH(){
 
 copyJar(){
 	sudo systemctl stop openhab.service > /dev/null 2>&1
-	sudo rm /usr/share/openhab/addons/org.openhab.binding.qbus.* > /dev/null 2>&1
+	sudo rm /usr/share/openhab/addons/org.openhab.binding.qbus* > /dev/null 2>&1
 	sudo cp /tmp/qbus/JAR/org.openhab.binding.qbus-3.1.0-SNAPSHOT.jar /usr/share/openhab/addons/ > /dev/null 2>&1
 	sudo openhab-cli clean-cache
 	sudo systemctl start openhab.service > /dev/null 2>&1
