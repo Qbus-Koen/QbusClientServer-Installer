@@ -281,7 +281,7 @@ DISPLTEXT='*                                                                    
 echoInColor
 DISPLTEXT='******************************************************************************************'
 echoInColor
-DISPLTEXT="Release date 10/04/2021 by ks@qbus.be"
+DISPLTEXT="Release date 16/04/2021 by ks@qbus.be"
 echoInColor
 echo ''
 DISPLTEXT="Welcome to the QbusClientServer installer."
@@ -294,6 +294,8 @@ echoInColor
 DISPLTEXT="This application is written in a .net environement, so on Linux distributions Mono is required."
 echoInColor
 DISPLTEXT="For the moment only openHAB is supported, but more applications will be enabled in the future."
+echoInColor
+DISPLTEXT="You can stop the installation process at any time by pressing <CTRL> - C."
 echoInColor
 echo ""
 
@@ -359,7 +361,7 @@ echoInColor
 read -p "$(echo -e $YELLOW"     -Enter username of your controller: "$NC)" USERVAR
 
 
-DISPLTEXT='     -Enter the password of your controller: '
+DISPLTEXT='     -Enter the password of your controller (just press enter if you have no pass) - be carefull (backspace is also considered as a char): '
 echoInColorP
 
 echo -e -n "$NC"
@@ -435,25 +437,25 @@ checkOH
 DISPLCOLOR=${GREEN}
 case $OPENHAB in
 	openHAB2)
-		DISPLTEXT='     -We have detected openHAB2 running on your device. The Qbus Binding is developped for the newest version of openHAB (3). At least the testing realse (3.1.0Mx) should be used. Please visit https://www.openhab.org/docs/configuration/migration/ for updating to the newest version. And https://www.openhab.org/download/ on how to install the Milestone release.'
+		DISPLTEXT='     -We have detected openHAB2 running on your device. The Qbus Binding is developped for the newest version of openHAB (3). Please visit https://www.openhab.org/docs/configuration/migration/ for updating to the newest version. And https://www.openhab.org/download/ on how to install.'
 		echoInColor
 		;;
 	OH3Unstable)
-		DISPLTEXT='     -We have detected openHAB running the unstable (3.1.0-SNAPSHOT) version. Qbus should work on this version. Since the Binding is not yet released, we will copy the testing JAR file to the correct location, stop OH, clean the cache (please answer yes) and start OH again. Please be patient, after a clean cache OH needs some time to reboot.'
+		DISPLTEXT='     -We have detected openHAB running the unstable (3.1.0-SNAPSHOT) version. The Qbus binding is included in the addons. Note that you can also use the main version if you copy the JAR to the addons folder.'
 		echoInColor
-		copyJar
 		;;
 	OH3Testing)
-		DISPLTEXT='     -We have detected openHAB running the testing (3.1.0Mx) version. Qbus should work on this version. Since the Binding is not yet released, we will copy the testing JAR file to the correct location, stop OH, clean the cache (please answer yes) and start OH again. Please be patient, after a clean cache OH needs some time to reboot.'
+		DISPLTEXT='     -We have detected openHAB running the testing (3.1.0Mx) version. Qbus works on this version, but the Binding is also suitable for the main release of openHAB. Since the Binding is not yet released, we will copy the testing JAR file to the correct location, stop OH, clean the cache (please answer yes) and start OH again. Please be patient, after a clean cache OH needs some time to reboot.'
 		echoInColor
 		copyJar
 		;;
 	OH3Stable)
-		DISPLTEXT='     -We have detected openHAB running the stable version (3.0.1). For this moment the binding does not work with te stable release of openHAB (3.0.1). At least the testing realse (3.1.0Mx) should be used.. Please visit https://www.openhab.org/download/ on how to install the Milestone release.'
+		DISPLTEXT='     -We have detected openHAB running the stable version (3.0.1). Qbus works on this version, but the Binding is also suitable for the main release of openHAB. Since the Binding is not yet released, we will copy the testing JAR file to the correct location, stop OH, clean the cache (please answer yes) and start OH again. Please be patient, after a clean cache OH needs some time to reboot.'
 		echoInColor
+		copyJar
 		;;
 	None)
-		DISPLTEXT='     -We did not detected openHAB running on your system. For this moment the binding does not work with te stable release of openHAB (3.0.1). At least the testing realse (3.1.0Mx) should be used.. Please visit https://www.openhab.org/download/ on how to install the Milestone release.'
+		DISPLTEXT='     -We did not detected openHAB running on your system. For the moment our client/server is only compatible with openHAB. Plesae visit https://www.openhab.org/download/ to install openHAB.'
 		echoInColor
 		;;
 esac
