@@ -1,5 +1,5 @@
 # Qbus Client-Server Installer
- Client Server application installer to be used on a Linux machine (raspberryPi).
+ Client Server application installer to be used on a Linux machine ( ex. raspberryPi ).
 
 ![Qbus Logo](https://github.com/QbusKoen/QbusClientServer-Installer/blob/main/images/Logo.JPG)
 
