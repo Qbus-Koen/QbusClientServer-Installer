@@ -251,9 +251,10 @@ checkOH(){
 }
 
 copyJar(){
+	git clone https://https://github.com/QbusKoen/QbusOH3-JAR  /tmp/qbus/ > /dev/null 2>&1
 	sudo systemctl stop openhab.service > /dev/null 2>&1
 	sudo rm /usr/share/openhab/addons/org.openhab.binding.qbus* > /dev/null 2>&1
-	sudo cp /tmp/qbus/JAR/org.openhab.binding.qbus-3.1.0-SNAPSHOT.jar /usr/share/openhab/addons/ > /dev/null 2>&1
+	sudo cp /tmp/qbus/org.openhab.binding.qbus-3.1.0-SNAPSHOT.jar /usr/share/openhab/addons/ > /dev/null 2>&1
 	sudo openhab-cli clean-cache
 	sudo systemctl start openhab.service > /dev/null 2>&1
 }
@@ -439,6 +440,9 @@ case $OPENHAB in
 	openHAB2)
 		DISPLTEXT='     -We have detected openHAB2 running on your device. The Qbus Binding is developped for the newest version of openHAB (3). Please visit https://www.openhab.org/docs/configuration/migration/ for updating to the newest version. And https://www.openhab.org/download/ on how to install.'
 		echoInColor
+		DISPLTEXT="         * If you choose to install openHAB(3), you should copy the JAR file (see your home folder) to /usr/share/openhab/addons/ after the installation and before you start openHAB."
+		echoInColor
+		sudo cp /tmp/qbus/org.openhab.binding.qbus-3.1.0-SNAPSHOT.jar ~/ > /dev/null 2>&1
 		;;
 	OH3Unstable)
 		DISPLTEXT='     -We have detected openHAB running the unstable (3.1.0-SNAPSHOT) version. The Qbus binding is included in the addons. Note that you can also use the main version if you copy the JAR to the addons folder.'
