@@ -486,6 +486,8 @@ DISPLCOLOR=${YELLOW}
 DISPLTEXT='* Cleaning up...'
 echoInColor
 sudo rm -R /tmp/qbus > /dev/null 2>&1
+sudo rm -R ~/QbusClientServer-Installer > /dev/null 2>&1
+
 
 DISPLTEXT='The installation is finished now. To make sure everything is set up correctly and to avoid problems, we suggest to do a reboot.'
 echoInColor
