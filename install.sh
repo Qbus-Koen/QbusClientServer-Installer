@@ -251,7 +251,7 @@ checkOH(){
 }
 
 copyJar(){
-	git clone https://https://github.com/QbusKoen/QbusOH3-JAR  /tmp/qbus/ > /dev/null 2>&1
+	git clone https://github.com/QbusKoen/QbusOH3-JAR  /tmp/qbus/ > /dev/null 2>&1
 	sudo systemctl stop openhab.service > /dev/null 2>&1
 	sudo rm /usr/share/openhab/addons/org.openhab.binding.qbus* > /dev/null 2>&1
 	sudo cp /tmp/qbus/org.openhab.binding.qbus-3.1.0-SNAPSHOT.jar /usr/share/openhab/addons/ > /dev/null 2>&1
@@ -454,7 +454,7 @@ case $OPENHAB in
 		copyJar
 		;;
 	OH3Stable)
-		DISPLTEXT='     -We have detected openHAB running the stable version (3.0.1). Qbus works on this version, but the Binding is also suitable for the main release of openHAB. Since the Binding is not yet released, we will copy the testing JAR file to the correct location, stop OH, clean the cache (please answer yes) and start OH again. Please be patient, after a clean cache OH needs some time to reboot.'
+		DISPLTEXT='     -We have detected openHAB running the stable version (3.0.1). Qbus works on this version. Since the Binding is not yet released, we will copy the testing JAR file to the correct location, stop OH, clean the cache (please answer yes) and start OH again. Please be patient, after a clean cache OH needs some time to reboot.'
 		echoInColor
 		copyJar
 		;;
