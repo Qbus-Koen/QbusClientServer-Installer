@@ -221,9 +221,9 @@ startQbus(){
 	
 	sudo systemctl daemon-reload > /dev/null 2>&1
 	sudo systemctl enable qbusserver.service > /dev/null 2>&1
-	sudo systemctl start qbusserver.service > /dev/null 2>&1
+	sudo systemctl restart qbusserver.service > /dev/null 2>&1
 	sudo systemctl enable qbusclient.service > /dev/null 2>&1
-	sudo systemctl start qbusclient.service > /dev/null 2>&1
+	sudo systemctl restart qbusclient.service > /dev/null 2>&1
 	
 	kill -9 $SPIN_PID
 }
