@@ -10,6 +10,8 @@ OPENHAB=''
 
 LUSER=''
 
+RESTARTOH=''
+
 # ============================== Define colors ==============================
 DISPLTEXT=''
 DISPLCOLOR=''
@@ -252,9 +254,12 @@ checkOH(){
 
 copyJar(){
 	git clone https://github.com/QbusKoen/QbusOH3-JAR  /tmp/qbus/ > /dev/null 2>&1
-	sudo systemctl stop openhab.service > /dev/null 2>&1
 	sudo rm /usr/share/openhab/addons/org.openhab.binding.qbus* > /dev/null 2>&1
 	sudo cp /tmp/qbus/org.openhab.binding.qbus-3.1.0-SNAPSHOT.jar /usr/share/openhab/addons/ > /dev/null 2>&1
+}
+
+restartOH(){
+	sudo systemctl stop openhab.service > /dev/null 2>&1
 	sudo openhab-cli clean-cache
 	sudo systemctl start openhab.service > /dev/null 2>&1
 }
@@ -282,7 +287,7 @@ DISPLTEXT='*                                                                    
 echoInColor
 DISPLTEXT='******************************************************************************************'
 echoInColor
-DISPLTEXT="Release date 16/04/2021 by ks@qbus.be"
+DISPLTEXT="Release date 17/04/2021 by ks@qbus.be"
 echoInColor
 echo ''
 DISPLTEXT="Welcome to the QbusClientServer installer."
@@ -449,20 +454,30 @@ case $OPENHAB in
 		echoInColor
 		;;
 	OH3Testing)
-		DISPLTEXT='     -We have detected openHAB running the testing (3.1.0Mx) version. Qbus works on this version, but the Binding is also suitable for the main release of openHAB. Since the Binding is not yet released, we will copy the testing JAR file to the correct location, stop OH, clean the cache (please answer yes) and start OH again. Please be patient, after a clean cache OH needs some time to reboot.'
+		DISPLTEXT='     -We have detected openHAB running the testing (3.1.0Mx) version. Qbus works on this version, but the Binding is also suitable for the main release of openHAB. Since the Binding is not yet released, we will copy the testing JAR file to the correct location.'
 		echoInColor
 		copyJar
+		read -p "$(echo -e $GREEN"     -To be able to use the Qbus binding, it is necessary to stop openHAB - clean the cache - and restart openHAB to load the JAR. Do you want to do this now?")" RESTARTOH
 		;;
 	OH3Stable)
-		DISPLTEXT='     -We have detected openHAB running the stable version (3.0.1). Qbus works on this version. Since the Binding is not yet released, we will copy the testing JAR file to the correct location, stop OH, clean the cache (please answer yes) and start OH again. Please be patient, after a clean cache OH needs some time to reboot.'
+		DISPLTEXT='     -We have detected openHAB running the stable version (3.0.1). Qbus works on this version. Since the Binding is not yet released, we will copy the testing JAR file to the correct location'
 		echoInColor
 		copyJar
+		read -p "$(echo -e $GREEN"     -To be able to use the Qbus binding, it is necessary to stop openHAB - clean the cache - and restart openHAB to load the JAR. Do you want to do this now?")" RESTARTOH
 		;;
 	None)
 		DISPLTEXT='     -We did not detected openHAB running on your system. For the moment our client/server is only compatible with openHAB. Plesae visit https://www.openhab.org/download/ to install openHAB.'
 		echoInColor
 		;;
 esac
+
+if [[ $REBOOT == "y" ]]; then
+	DISPLTEXT='* Stopping openHAB - Cleaning cache - Starting openHAB...'
+	echoInColor
+	DISPLTEXT='     - This procedure will take some time. Please be patient. To clean the cache, please answer with y when asked.'
+	echoInColor
+	restartOH
+fi
 
 echo ''
 
@@ -484,5 +499,3 @@ else
 	DISPLTEXT='* You choose to not reboot your system. If you run into problems, first try to reboot!'
 	echoInColor
 fi
-
-exit 1
