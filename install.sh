@@ -471,7 +471,7 @@ case $OPENHAB in
 		;;
 esac
 
-if [[ $REBOOT == "y" ]]; then
+if [[ $RESTARTOH == "y" ]]; then
 	DISPLTEXT='* Stopping openHAB - Cleaning cache - Starting openHAB...'
 	echoInColor
 	DISPLTEXT='     - This procedure will take some time. Please be patient. To clean the cache, please answer with y when asked.'
