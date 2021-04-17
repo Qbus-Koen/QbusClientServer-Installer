@@ -253,9 +253,9 @@ checkOH(){
 }
 
 copyJar(){
-	git clone https://github.com/QbusKoen/QbusOH3-JAR  /tmp/qbus/QbusOH3-JAR #> /dev/null 2>&1
-	sudo rm /usr/share/openhab/addons/org.openhab.binding.qbus* #> /dev/null 2>&1
-	sudo cp /tmp/qbus/QbusOH3-JAR/org.openhab.binding.qbus-3.1.0-SNAPSHOT.jar /usr/share/openhab/addons/ #> /dev/null 2>&1
+	git clone https://github.com/QbusKoen/QbusOH3-JAR  /tmp/qbus/QbusOH3-JAR > /dev/null 2>&1
+	sudo rm /usr/share/openhab/addons/org.openhab.binding.qbus* > /dev/null 2>&1
+	sudo cp /tmp/qbus/QbusOH3-JAR/org.openhab.binding.qbus-3.1.0-SNAPSHOT.jar /usr/share/openhab/addons/ > /dev/null 2>&1
 }
 
 restartOH(){
@@ -457,13 +457,13 @@ case $OPENHAB in
 		DISPLTEXT='     -We have detected openHAB running the testing (3.1.0Mx) version. Qbus works on this version, but the Binding is also suitable for the main release of openHAB. Since the Binding is not yet released, we will copy the testing JAR file to the correct location.'
 		echoInColor
 		copyJar
-		read -p "$(echo -e $GREEN"     -To be able to use the Qbus binding, it is necessary to stop openHAB - clean the cache - and restart openHAB to load the JAR. Do you want to do this now?")" RESTARTOH
+		read -p "$(echo -e $GREEN"     -To be able to use the Qbus binding, it is necessary to stop openHAB - clean the cache - and restart openHAB to load the JAR. Do you want to do this now? (y/n)")" RESTARTOH
 		;;
 	OH3Stable)
 		DISPLTEXT='     -We have detected openHAB running the stable version (3.0.1). Qbus works on this version. Since the Binding is not yet released, we will copy the testing JAR file to the correct location'
 		echoInColor
 		copyJar
-		read -p "$(echo -e $GREEN"     -To be able to use the Qbus binding, it is necessary to stop openHAB - clean the cache - and restart openHAB to load the JAR. Do you want to do this now?")" RESTARTOH
+		read -p "$(echo -e $GREEN"     -To be able to use the Qbus binding, it is necessary to stop openHAB - clean the cache - and restart openHAB to load the JAR. Do you want to do this now? (y/n)")" RESTARTOH
 		;;
 	None)
 		DISPLTEXT='     -We did not detected openHAB running on your system. For the moment our client/server is only compatible with openHAB. Plesae visit https://www.openhab.org/download/ to install openHAB.'
