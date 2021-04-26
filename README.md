@@ -25,16 +25,12 @@ Then clone this repository:
 
 ```git clone https://github.com/QbusKoen/QbusClientServer-Installer```
 
-Go into the directory:
-
-```cd QbusClientServer-Installer```
-
 Give executable rights to installer:
 
-```chmod +x install.sh```
+```chmod +x QbusClientServer-Installer/install.sh```
 
 Run the installer:
-```./install.sh```
+```QbusClientServer-Installer/./install.sh```
 
 The installer will then ask for Username, Password, IP address and Serial nr of your controller.
 
