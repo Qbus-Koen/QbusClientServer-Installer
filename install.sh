@@ -160,7 +160,7 @@ installQbus(){
 	sudo cp -R /tmp/qbus/QbusServer/. /usr/bin/qbus/qbusserver > /dev/null 2>&1
 
 	# Modify config file
-	sudo sed -i "s|<value>.\+</value>|<value>/usr/bin/qbus/qbusclient/</value>|g" /usr/bin/qbus/qbusclient/QbusClient.exe.config > /dev/null 2>&1
+	sudo sed -i "s|<value>.\+</value>|<value>/usr/bin/qbus/qbusclient</value>|g" /usr/bin/qbus/qbusclient/QbusClient.exe.config > /dev/null 2>&1
 	
 	# Create cleanup.sh
 	echo '#!/bin/bash' | sudo tee -a /usr/bin/qbus/qbusclient/cleanup.sh > /dev/null 2>&1
