@@ -7,6 +7,7 @@ IPVAR=''
 SNVAR=''
 
 OPENHAB=''
+TESTOPENHAB = ''
 
 LUSER=''
 
@@ -213,6 +214,24 @@ installQbus(){
 	kill -9 $SPIN_PID
 }
 
+# Function for log rotation
+createLogRotate(){
+	spin &
+	SPIN_PID=$!
+	trap "kill -9 $SPIN_PID" `seq 0 15`
+
+	sudo rm -R /etc/Logrotate.d/qbus > /dev/null 2>&1
+
+	echo '/var/log/qbus/* {' | sudo tee -a /etc/Logrotate.d/qbus > /dev/null 2>&1
+	echo '        daily' | sudo tee -a /etc/Logrotate.d/qbus > /dev/null 2>&1
+	echo '        rotate 7' | sudo tee -a /etc/Logrotate.d/qbus > /dev/null 2>&1
+	echo '        size 10M' | sudo tee -a /etc/Logrotate.d/qbus > /dev/null 2>&1
+	echo '        compress' | sudo tee -a /etc/Logrotate.d/qbus > /dev/null 2>&1
+	echo '        delaycompress' | sudo tee -a /etc/Logrotate.d/qbus > /dev/null 2>&1
+
+	kill -9 $SPIN_PID	
+}
+
 # Function to start Qbus services
 startQbus(){
 	spin &
@@ -241,8 +260,6 @@ checkOH(){
 	  OH3V=$(cat /etc/apt/sources.list.d/openhab.list)
 	  if [[ $OH3V =~ "unstable" ]]; then
 			OPENHAB="OH3Unstable"
-	  elif [[ $OH3V =~ "testing" ]]; then
-			OPENHAB="OH3Testing"
 	  elif [[ $OH3V =~ "stable" ]]; then
 			OPENHAB="OH3Stable"
 	  fi
@@ -353,7 +370,7 @@ echo ''
 
 # ---------------- Ask Qbus credentials  -----------------------
 DISPLCOLOR=${RED}
-DISPLTEXT='      To communicate with your controller, it is necessary that the SDK (DLL) option is enabled. (see https://openhab-wiki.qbus.be/nl/inleiding).'
+DISPLTEXT='      To communicate with your controller, it is necessary that the SDK (DLL) option is enabled. (see https://iot.qbus.be/nl/inleiding).'
 echoInColor
 DISPLTEXT='      Make sure the option is enabled before continuing'
 echoInColor
@@ -424,6 +441,11 @@ echoInColor
 installQbus
 echo ''
 
+DISPLTEXT='* Creating file for log rotation...'
+echoInColor
+createLogRotate
+echo ''
+
 DISPLTEXT='* Starting Qbus services'
 echoInColor
 startQbus
@@ -445,31 +467,27 @@ case $OPENHAB in
 	openHAB2)
 		DISPLTEXT='     -We have detected openHAB2 running on your device. The Qbus Binding is developped for the newest version of openHAB (3). Please visit https://www.openhab.org/docs/configuration/migration/ for updating to the newest version. And https://www.openhab.org/download/ on how to install.'
 		echoInColor
-		DISPLTEXT="         * If you choose to install openHAB(3), you should copy the JAR file (see your home folder) to /usr/share/openhab/addons/ after the installation and before you start openHAB."
-		echoInColor
-		sudo cp /tmp/qbus/org.openhab.binding.qbus-3.1.0-SNAPSHOT.jar ~/ > /dev/null 2>&1
 		;;
 	OH3Unstable)
-		DISPLTEXT='     -We have detected openHAB running the unstable (3.1.0-SNAPSHOT) version. The Qbus binding is included in the addons. Note that you can also use the main version if you copy the JAR to the addons folder.'
+		DISPLTEXT='     -We have detected openHAB running the Snapshot version. The Qbus binding is included in the addons.'
 		echoInColor
-		;;
-	OH3Testing)
-		DISPLTEXT='     -We have detected openHAB running the testing (3.1.0Mx) version. Qbus works on this version, but the Binding is also suitable for the main release of openHAB. Since the Binding is not yet released, we will copy the testing JAR file to the correct location.'
-		echoInColor
-		copyJar
-		read -p "$(echo -e $GREEN"     -To be able to use the Qbus binding, it is necessary to stop openHAB - clean the cache - and restart openHAB to load the JAR. Do you want to do this now? (y/n)")" RESTARTOH
 		;;
 	OH3Stable)
-		DISPLTEXT='     -We have detected openHAB running the stable version (3.0.1). Qbus works on this version. Since the Binding is not yet released, we will copy the testing JAR file to the correct location'
+		DISPLTEXT='     -We have detected openHAB running the Stable version. The Qbus binding is included in the addons.'
 		echoInColor
-		copyJar
-		read -p "$(echo -e $GREEN"     -To be able to use the Qbus binding, it is necessary to stop openHAB - clean the cache - and restart openHAB to load the JAR. Do you want to do this now? (y/n)")" RESTARTOH
 		;;
 	None)
 		DISPLTEXT='     -We did not detected openHAB running on your system. For the moment our client/server is only compatible with openHAB. Plesae visit https://www.openhab.org/download/ to install openHAB.'
 		echoInColor
 		;;
 esac
+
+read -p "$(echo -e $GREEN"     -For the moment we are still developping the openHAB Binding. The latest version includes the ECM module, but is not yet released. Do you want to test this binding? If you do so, we will copy the test JAR to overwrite the released version. (y/n)")" TESTOPENHAB
+
+if [[ $TESTOPENHAB == "y" ]]; then
+	copyJar()
+	read -p "$(echo -e $GREEN"     -To be able to use the test binding, it is necessary to stop openHAB - clean the cache - and restart openHAB to load the JAR. Do you want to do this now? (y/n)")" RESTARTOH
+fi
 
 if [[ $RESTARTOH == "y" ]]; then
 	DISPLTEXT='* Stopping openHAB - Cleaning cache - Starting openHAB...'
