@@ -265,7 +265,7 @@ checkOH(){
 	  fi
 	else
 	  # OH not installed
-	  OPENHAB = "None"
+	  OPENHAB="None"
 	fi
 }
 
@@ -472,10 +472,22 @@ case $OPENHAB in
 	OH3Unstable)
 		DISPLTEXT='     -We have detected openHAB running the Snapshot version. The Qbus binding is included in the addons.'
 		echoInColor
+		read -p "$(echo -e $GREEN"     -For the moment we are still developping the openHAB Binding. The latest version includes the ECM module, but is not yet released. Do you want to test this binding? If you do so, we will copy the test JAR to overwrite the released version. (y/n)")" TESTOPENHAB
+
+		if [[ $TESTOPENHAB == "y" ]]; then
+			copyJar()
+			read -p "$(echo -e $GREEN"     -To be able to use the test binding, it is necessary to stop openHAB - clean the cache - and restart openHAB to load the JAR. Do you want to do this now? (y/n)")" RESTARTOH
+		fi
 		;;
 	OH3Stable)
 		DISPLTEXT='     -We have detected openHAB running the Stable version. The Qbus binding is included in the addons.'
 		echoInColor
+		read -p "$(echo -e $GREEN"     -For the moment we are still developping the openHAB Binding. The latest version includes the ECM module, but is not yet released. Do you want to test this binding? If you do so, we will copy the test JAR to overwrite the released version. (y/n)")" TESTOPENHAB
+
+		if [[ $TESTOPENHAB == "y" ]]; then
+			copyJar()
+			read -p "$(echo -e $GREEN"     -To be able to use the test binding, it is necessary to stop openHAB - clean the cache - and restart openHAB to load the JAR. Do you want to do this now? (y/n)")" RESTARTOH
+		fi
 		;;
 	None)
 		DISPLTEXT='     -We did not detected openHAB running on your system. For the moment our client/server is only compatible with openHAB. Plesae visit https://www.openhab.org/download/ to install openHAB.'
@@ -483,12 +495,7 @@ case $OPENHAB in
 		;;
 esac
 
-read -p "$(echo -e $GREEN"     -For the moment we are still developping the openHAB Binding. The latest version includes the ECM module, but is not yet released. Do you want to test this binding? If you do so, we will copy the test JAR to overwrite the released version. (y/n)")" TESTOPENHAB
 
-if [[ $TESTOPENHAB == "y" ]]; then
-	copyJar()
-	read -p "$(echo -e $GREEN"     -To be able to use the test binding, it is necessary to stop openHAB - clean the cache - and restart openHAB to load the JAR. Do you want to do this now? (y/n)")" RESTARTOH
-fi
 
 if [[ $RESTARTOH == "y" ]]; then
 	DISPLTEXT='* Stopping openHAB - Cleaning cache - Starting openHAB...'
