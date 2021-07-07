@@ -475,7 +475,7 @@ case $OPENHAB in
 		read -p "$(echo -e $GREEN"     -For the moment we are still developping the openHAB Binding. The latest version includes the ECM module, but is not yet released. Do you want to test this binding? If you do so, we will copy the test JAR to overwrite the released version. (y/n)")" TESTOPENHAB
 
 		if [[ $TESTOPENHAB == "y" ]]; then
-			copyJar()
+			copyJar
 			read -p "$(echo -e $GREEN"     -To be able to use the test binding, it is necessary to stop openHAB - clean the cache - and restart openHAB to load the JAR. Do you want to do this now? (y/n)")" RESTARTOH
 		fi
 		;;
@@ -485,7 +485,7 @@ case $OPENHAB in
 		read -p "$(echo -e $GREEN"     -For the moment we are still developping the openHAB Binding. The latest version includes the ECM module, but is not yet released. Do you want to test this binding? If you do so, we will copy the test JAR to overwrite the released version. (y/n)")" TESTOPENHAB
 
 		if [[ $TESTOPENHAB == "y" ]]; then
-			copyJar()
+			copyJar
 			read -p "$(echo -e $GREEN"     -To be able to use the test binding, it is necessary to stop openHAB - clean the cache - and restart openHAB to load the JAR. Do you want to do this now? (y/n)")" RESTARTOH
 		fi
 		;;
