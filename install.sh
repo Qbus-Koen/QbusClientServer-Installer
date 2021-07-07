@@ -305,7 +305,7 @@ DISPLTEXT='*                                                                    
 echoInColor
 DISPLTEXT='******************************************************************************************'
 echoInColor
-DISPLTEXT="Release date 17/04/2021 by ks@qbus.be"
+DISPLTEXT="Release date 07/07/2021 by ks@qbus.be"
 echoInColor
 echo ''
 DISPLTEXT="Welcome to the QbusClientServer installer."
