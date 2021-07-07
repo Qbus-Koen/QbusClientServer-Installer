@@ -272,8 +272,8 @@ checkOH(){
 copyJar(){
 	git clone https://github.com/QbusKoen/QbusOH3-JAR  /tmp/qbus/QbusOH3-JAR > /dev/null 2>&1
 	sudo rm /usr/share/openhab/addons/org.openhab.binding.qbus* > /dev/null 2>&1
-	sudo cp /tmp/qbus/QbusOH3-JAR/org.openhab.binding.qbus-3.1.0-SNAPSHOT.jar /usr/share/openhab/addons/ > /dev/null 2>&1
-	sudo chown openhab:openhab  /usr/share/openhab/addons/org.openhab.binding.qbus-3.1.0-SNAPSHOT.jar
+	sudo cp /tmp/qbus/QbusOH3-JAR/org.openhab.binding.qbus-3.2.0-SNAPSHOT.jar /usr/share/openhab/addons/ > /dev/null 2>&1
+	sudo chown openhab:openhab  /usr/share/openhab/addons/org.openhab.binding.qbus-3.2.0-SNAPSHOT.jar
 }
 
 restartOH(){
