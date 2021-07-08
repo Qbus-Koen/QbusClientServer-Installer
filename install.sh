@@ -220,14 +220,15 @@ createLogRotate(){
 	SPIN_PID=$!
 	trap "kill -9 $SPIN_PID" `seq 0 15`
 
-	sudo rm -R /etc/Logrotate.d/qbus > /dev/null 2>&1
+	sudo rm -R /etc/logrotate.d/qbus > /dev/null 2>&1
 
-	echo '/var/log/qbus/* {' | sudo tee -a /etc/Logrotate.d/qbus > /dev/null 2>&1
-	echo '        daily' | sudo tee -a /etc/Logrotate.d/qbus > /dev/null 2>&1
-	echo '        rotate 7' | sudo tee -a /etc/Logrotate.d/qbus > /dev/null 2>&1
-	echo '        size 10M' | sudo tee -a /etc/Logrotate.d/qbus > /dev/null 2>&1
-	echo '        compress' | sudo tee -a /etc/Logrotate.d/qbus > /dev/null 2>&1
-	echo '        delaycompress' | sudo tee -a /etc/Logrotate.d/qbus > /dev/null 2>&1
+	echo '/var/log/qbus/* {' | sudo tee -a /etc/logrotate.d/qbus > /dev/null 2>&1
+	echo '        daily' | sudo tee -a /etc/logrotate.d/qbus > /dev/null 2>&1
+	echo '        rotate 7' | sudo tee -a /etc/logrotate.d/qbus > /dev/null 2>&1
+	echo '        size 10M' | sudo tee -a /etc/logrotate.d/qbus > /dev/null 2>&1
+	echo '        compress' | sudo tee -a /etc/logrotate.d/qbus > /dev/null 2>&1
+	echo '        delaycompress' | sudo tee -a /etc/logrotate.d/qbus > /dev/null 2>&1
+	echo '}' | sudo tee -a /etc/logrotate.d/qbus > /dev/null 2>&1
 
 	kill -9 $SPIN_PID	
 }
