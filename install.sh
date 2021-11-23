@@ -222,7 +222,7 @@ createLogRotate(){
 
 	sudo rm -R /etc/logrotate.d/qbus > /dev/null 2>&1
 
-	echo '/var/log/qbus/* {' | sudo tee -a /etc/logrotate.d/qbus > /dev/null 2>&1
+	echo '/var/log/qbus/*.log {' | sudo tee -a /etc/logrotate.d/qbus > /dev/null 2>&1
 	echo '        daily' | sudo tee -a /etc/logrotate.d/qbus > /dev/null 2>&1
 	echo '        rotate 7' | sudo tee -a /etc/logrotate.d/qbus > /dev/null 2>&1
 	echo '        size 10M' | sudo tee -a /etc/logrotate.d/qbus > /dev/null 2>&1
@@ -471,24 +471,14 @@ case $OPENHAB in
 		echoInColor
 		;;
 	OH3Unstable)
-		DISPLTEXT='     -We have detected openHAB running the Snapshot version. The Qbus binding is included in the addons.'
+		DISPLTEXT='     -We have detected openHAB running the Snapshot version. Please use the Stable release or visit https://github.com/QbusKoen/QbusOH3-Install'
 		echoInColor
-		read -p "$(echo -e $GREEN"     -For the moment we are still developping the openHAB Binding. The latest version includes the ECM module, but is not yet released. Do you want to test this binding? If you do so, we will copy the test JAR to overwrite the released version. (y/n)")" TESTOPENHAB
-
-		if [[ $TESTOPENHAB == "y" ]]; then
-			copyJar
-			read -p "$(echo -e $GREEN"     -To be able to use the test binding, it is necessary to stop openHAB - clean the cache - and restart openHAB to load the JAR. Do you want to do this now? (y/n)")" RESTARTOH
-		fi
 		;;
 	OH3Stable)
 		DISPLTEXT='     -We have detected openHAB running the Stable version. The Qbus binding is included in the addons.'
 		echoInColor
-		read -p "$(echo -e $GREEN"     -For the moment we are still developping the openHAB Binding. The latest version includes the ECM module, but is not yet released. Do you want to test this binding? If you do so, we will copy the test JAR to overwrite the released version. (y/n)")" TESTOPENHAB
-
-		if [[ $TESTOPENHAB == "y" ]]; then
-			copyJar
-			read -p "$(echo -e $GREEN"     -To be able to use the test binding, it is necessary to stop openHAB - clean the cache - and restart openHAB to load the JAR. Do you want to do this now? (y/n)")" RESTARTOH
-		fi
+		DISPLTEXT='     -We are still developping the openHAB binding. If you like to test our latest release, please visit https://github.com/QbusKoen/QbusOH3-Install'
+		echoInColor		
 		;;
 	None)
 		DISPLTEXT='     -We did not detected openHAB running on your system. For the moment our client/server is only compatible with openHAB. Plesae visit https://www.openhab.org/download/ to install openHAB.'
